@@ -35,24 +35,24 @@
     } \
   } 
 
-#define M_MMA(op_dtype, acc_dtype) \ 
-  require_extension(EXT_XMATRIX); \ 
-  const reg_t ms1 = insn.matrix_ms1(); \ 
-  const reg_t ms2 = insn.matrix_ms2(); \ 
-  const reg_t md = insn.matrix_md(); \ 
-  const size_t reg_size = P.MU.get_rlen() * 2; \ 
-  auto ms1_reg = (op_dtype*)((uint8_t*)P.MU.reg_file + ms1 * reg_size); \ 
-  auto ms2_reg = (op_dtype*)((uint8_t*)P.MU.reg_file + ms2 * reg_size); \ 
-  auto md_reg = (acc_dtype*)((uint8_t*)P.MU.reg_file + md * reg_size); \ 
-  for (int i = 0; i < P.MU.sizeM; i++) { \ 
-      for (int j = 0; j < P.MU.sizeN; j++) { \ 
-          auto temp = md_reg[i*P.MU.sizeN + j]; \ 
-          auto K_LEN = (P.MU.sizeK*4)/(sizeof(op_dtype));\ 
-          for (int k = 0; k < K_LEN; k++) { \ 
-              /*printf("%d %d %f %f\n", i*P.MU.sizeK + k, j*P.MU.sizeK + k, ms1_reg[i*P.MU.sizeK + k], ms2_reg[j*P.MU.sizeK + k]);*/\ 
-              temp += ms1_reg[i*K_LEN + k] * ms2_reg[j*K_LEN + k]; \ 
-          } \ 
-          md_reg[i*P.MU.sizeN + j] = temp; \ 
-      } \ 
+#define M_MMA(op_dtype, acc_dtype) \
+  require_extension(EXT_XMATRIX); \
+  const reg_t ms1 = insn.matrix_ms1(); \
+  const reg_t ms2 = insn.matrix_ms2(); \
+  const reg_t md = insn.matrix_md(); \
+  const size_t reg_size = P.MU.get_rlen() * 2; \
+  auto ms1_reg = (op_dtype*)((uint8_t*)P.MU.reg_file + ms1 * reg_size); \
+  auto ms2_reg = (op_dtype*)((uint8_t*)P.MU.reg_file + ms2 * reg_size); \
+  auto md_reg = (acc_dtype*)((uint8_t*)P.MU.reg_file + md * reg_size); \
+  for (int i = 0; i < P.MU.sizeM; i++) { \
+      for (int j = 0; j < P.MU.sizeN; j++) { \
+          auto temp = md_reg[i*P.MU.sizeN + j]; \
+          auto K_LEN = (P.MU.sizeK*4)/(sizeof(op_dtype));\
+          for (int k = 0; k < K_LEN; k++) { \
+              /*printf("%d %d %f %f\n", i*P.MU.sizeK + k, j*P.MU.sizeK + k, ms1_reg[i*P.MU.sizeK + k], ms2_reg[j*P.MU.sizeK + k]);*/\
+              temp += ms1_reg[i*K_LEN + k] * ms2_reg[j*K_LEN + k]; \
+          } \
+          md_reg[i*P.MU.sizeN + j] = temp; \
+      } \
   }
 #endif // _RISCV_MATRIX_EXT_MACROS_H
