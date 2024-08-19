@@ -1,0 +1,1 @@
+M_MMA(int32_t, int32_t)

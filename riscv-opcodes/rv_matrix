@@ -1,0 +1,18 @@
+# *** RV Matrix Extension ***
+# Symbols are contained within arg_lut.csv!
+
+# These should be integers but we'll have them FP
+
+# Arithmetic
+fmmacc_s          31..27=0b00001 26..25=0x0 24=0x0 ms2 ms1 md 14..12=0x0 11..7=0b10000 6..0=0b0101011
+mmasa_w           31..27=0b11110 26..25=0x0 24=0x0 ms2 ms1 md 14..12=0x0 11..7=0b10000 6..0=0b0101011
+mmada_h           31..27=0b11100 26..25=0x0 24=0x0 ms2 ms1 md 14..12=0x0 11..7=0b01000 6..0=0b0101011
+mmaqa_b           31..27=0b00010 26..25=0x0 24=0x0 ms2 ms1 md 14..12=0x0 11..7=0b00000 6..0=0b0101011
+mzero             31..27=0b11111 26..18=0x0 md 14..12=0x0 11..7=0b00000 6..0=0b0101011
+
+# Load/store
+mld_w             31..27=0b00000 26..25=0b10 rs2 rs1 14..12=0x0 11..10=0b10 md_ 6..0=0b101011 
+mst_w             31..27=0b00001 26..25=0b10 rs2 rs1 14..12=0x0 11..10=0b10 ms3 6..0=0b101011 
+
+# Config
+# mcfg              31..27=0b11111 26..25=0b11 24..20=0b00000 rs1 14..12=0b000 rd 6..0=0b0101011 
