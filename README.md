@@ -75,7 +75,7 @@ All instructions share `7'b0101011` (CUSTOM 1) as the major opcode, and func3 is
 
 |31 27 |26 25 |24 20 |19 15 |14 12 |11 10 |9 7 |6 0 | mnemonic | 
 | ---- | ---- |----- | ---- | ---- | ---- | -- | -- | ------- |
-|00000	|10 |	rs2	|rs1	|func3	|10	|md	|major opcode	| mld.w |
+|00000	|00 |	rs2	|rs1	|func3	|10	|md	|major opcode	| mld.w |
 |00001	|10 |	rs2	|rs1	|func3	|10	|ms1	|major opcode	|mst.w |
 
 # Toolchain/Simulator
